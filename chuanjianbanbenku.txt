@@ -17,3 +17,14 @@ git diff
 #使用add后可以再用git status看仓库的状态，让自己放心~
 git add <file>
 git commit -m "add 2 sentences"
+
+#查看自己提交的版本，文件的一些信息
+git log
+git log --pretty=oneline #可以精简输出信息
+
+#HEAD指向的版本就是当前的版本，git可以让我们在不同的版本之间穿梭？但是可以针对某个文件的修改而穿梭吗？还是只能有一个，刚刚想恢复readme结果恢复了另一个，就很尴尬
+git reset --hard commit_id
+#可以用git log查看提交历史，确定要回去的版本，精简输出可以用git log --pretty=oneline
+git log
+#重新回到“未来”的版本，可以用git relog查看历史命令
+git relog
