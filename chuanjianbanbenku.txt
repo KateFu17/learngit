@@ -9,3 +9,8 @@ git commit -m <message> # message里面可以添加改动的信息 -m后面输�
 # git config --global --edit
 # 做了这步之后，用下列方法修正本次提交使用的身份
 # git commit --amend --reset-author
+
+#用这个命令可以让我们掌握仓库当前的状态
+git status
+#这个命令可以看看具体修改了什么内容
+git diff
