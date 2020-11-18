@@ -7,3 +7,5 @@ Git is free software.
 Git diff can be used before add and commit.
 
 Git has a mutable index called stage.
+
+Git tracks changes.
