@@ -1,0 +1,11 @@
+#在/Users/katefu/learngit下创建一个文件并且进入该文件
+mkdir learngit
+#初始化一个Git仓库，使用这个命令！出现了一个.git的东东
+git init
+#添加文件到Git仓库
+git add <file> #可以一次加好几个，可反复多次使用，添加多个文件
+git commit -m <message> # message里面可以添加改动的信息 -m后面输入的是本次提交的说明
+#自动配置了姓名和电子邮件 电脑的用户名和主机名 设置这些东西：
+# git config --global --edit
+# 做了这步之后，用下列方法修正本次提交使用的身份
+# git commit --amend --reset-author
