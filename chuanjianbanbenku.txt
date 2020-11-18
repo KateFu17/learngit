@@ -14,3 +14,6 @@ git commit -m <message> # message里面可以添加改动的信息 -m后面输�
 git status
 #这个命令可以看看具体修改了什么内容
 git diff
+#使用add后可以再用git status看仓库的状态，让自己放心~
+git add <file>
+git commit -m "add 2 sentences"
