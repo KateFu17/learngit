@@ -81,3 +81,73 @@ git merge dev #fast-forward合并的快进模式
 # 合并后可以删除分支
 git branch -d dev
 git branch
+
+#解决冲突 无法自动合并分支时
+#解决方法就是合并失败的地方手动编辑为统一内容，再提交
+# 可以看到分支合并详情
+git log --graph --pretty=oneline --abbrev-commit
+
+# 分支管理策略
+# --no-ff参数表示禁用Fast forward，普通模式合并，可以看出曾经做过合并
+git merge --no-ff -m "merge with no-ff" dev
+# main分支平时不在上面干活，一般在dev上，可以和小伙伴在dev分支上干活，时不时合并到dev上
+
+# Bug分支
+# 出现bug的时候，可以建立临时分支来修复，修复后合并分支，再将临时分支删除。但是可能你正在进行的工作还未完成，没法提交，git可以让你把当前的工作现场储存起来，等恢复现场后继续工作
+git stash
+git status
+# 查看工作区，可以看到工作区是干净的，可以放心地创建分支修复bug
+# 假如在main分支上修复，就从main创建临时分支
+git checkout main
+git checkout -b issue-101
+# 修复后，切换到main分支，并完成合并，最后删除issue-101分支
+git switch main
+git merge --no-ff -m "merged bug fix 101" issue-101
+# 回到dev分支干活
+git switch dev
+git status
+# 找刚才的工作现场
+git stash list
+# 两种方法
+git stash apply #方法一，恢复后stash内容并不删除，需要git stash drop来删除
+git stash pop #方法二，恢复的同时把stash内容也删除了
+git stash list
+#可以多次stash，恢复的时候用git stash list查看，恢复指定的stash
+git stash apply stash@{0}
+
+# 将同样的修改复制到别的分支上
+cherry-pick #能复制一个特定的提交到当前分支
+git status #看是否在需要改动的分支上
+git cherry-pick 4c805e2 #之前改动的特定的提交
+
+# Feature分支
+# 创建一个feature分支
+git switch -c feature-vulcan
+#添加一个文件
+git add vulcan.py
+git status
+git commit -m "add feature vulcan"
+git switch dev #准备合并
+git branch -d feature-vulcan #为啥我的没有报错 挠头 可能是我哪里做错了GG
+#主要是看强行删除命令
+git branch -D feature-vulcan
+
+# 多人协作
+# 查看远程库的信息
+git remote
+# 详细信息 git remote -v
+# 推送分支
+git push origin main #推送其他分支 git push origin dev
+# 抓取分支
+# git pull把最新的提交从origin/dev抓下来，在本地合并，解决冲突再推送
+# 需设置本地dev和远程origin/dev分支的链接
+git branch --set-upstream-to=origin/dev dev
+git pull
+#工作模式
+#1.首先，可以试图用git push origin <branch-name>推送自己的修改；
+#2.如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+#3.如果合并有冲突，则解决冲突，并在本地提交；
+#4.没有冲突或者解决掉冲突后，再用git push origin <branch-name>推送就能成功！
+#如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream-to <branch-name> origin/<branch-name>。
+
+# rebase
