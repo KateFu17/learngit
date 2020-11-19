@@ -56,6 +56,28 @@ echo "# learngit" >> README.md
 git init
 git add README.md
 git commit -m "first commit"
-git branch -M main
+git branch -M main #这个好像是指定branch？第一次没做这一步导致了报错
 git remote add origin https://github.com/KateFu17/learngit.git
-git push -u origin main
+git push -u origin main #-u 第一次推送main分支的所有内容
+# 现在只要本地提交了，就可以通过命令将最新的修改推送至GitHub
+git push origin main
+
+#远程库克隆
+# https，也可以用ssh，https比较慢，ssh比较快
+# 克隆一个仓库，先知道仓库的地址，然后使用git clone
+git clone git@github.com:michaelliao/gitskills.git
+
+#分支管理
+# 创建分支
+git branch <name>
+# 创建分支并切换到该分支
+git switch -c dev
+#切换到已有分支
+git switch dev
+# 可以在该分支中改东西并且提交
+git branch #查看分支
+# 把dev分支的工作成果合并到main分支上
+git merge dev #fast-forward合并的快进模式
+# 合并后可以删除分支
+git branch -d dev
+git branch
