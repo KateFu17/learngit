@@ -35,3 +35,27 @@ git restore readme.txt#直接丢弃工作区的修改
 #常用git status搞清楚现在的状态
 #已经用git add后，可以用git restore --staged readme.txt将文件从stage里取出来
 git restore --stage readme.txt #添加到了暂存区想丢弃修改，先撤回到工作区再用上个命令丢弃工作区的修改
+
+#删除文件
+#再文件管理器中移除文件
+rm test.txt
+git status #可以看到删除了什么文件
+#确实从版本库中删除文件则
+git rm test.txt
+git commit -m “remove test.txt”
+#删除错误时，假如已经提交过版本库，可以把误删的文件恢复到最新版本
+
+#远程仓库
+# 用户主目录是 ~ ！可以用ls -al ~/.ssh看有没有密钥文件
+# 如果没有可以创建 ssh-keygen -t rsa -C "youremail@example.com"
+# id_rsa是私钥 id_rsa.pub 是公钥
+# 复制公钥 复制这个文件里内容到clipboard
+pbcopy < ~/.ssh/id_rsa.pub
+# create a new repository on the command line GitHub上的命令行教学
+echo "# learngit" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/KateFu17/learngit.git
+git push -u origin main
