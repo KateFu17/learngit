@@ -151,3 +151,65 @@ git pull
 #如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream-to <branch-name> origin/<branch-name>。
 
 # rebase
+#许多人在评论里说可以自己好好学学
+
+# 标签管理
+git branch
+# 切换到需要打标签的分支上
+git switch main #举个例子
+# git tag <name> 可以打一个新标签
+git tag v1.0 # 默认标签是打在最新提交的commit上的（默认为HAED，也可以指定一个commit id）
+# git tag 命令可以查看所有标签
+#给历史commit打标签，找到历史提交的commit如，git log --pretty=oneline --abbrev-commit
+#如：git tag v0.9 f52c633
+git show v0.9 #查看标签信息
+# 创建带有说明的标签，用-a指定标签名，-m指定说明文字
+# git tag -a v0.1 -m "version 0.1 released" 1094adb
+
+#操作标签
+#打错标签后可以删除
+git tag -d v0.1
+#推送标签到远程
+git push origin v1.0
+#或者，一次性推送全部尚未推送到远程的本地标签
+git push origin --tags
+#已经将标签推送到远程，删除远程标签就麻烦一点，先从本地删除再从远程删除
+git tag -d v0.9
+git push origin:refs/tags/v0.9
+
+#国内Git托管服务--Gitee (gitee.com)
+#删除已有的GitHub远程库
+git remote rm origin
+# 本地库既关联GitHub又关联Gitee，用不同的名称标识不同的远程库
+git remote rm origin
+# 例子 git remote add github git@github.com:michaelliao/learngit.git 远程库的名字变成github
+# 例子 git remote add gitee git@gitee.com:liaoxuefeng/learngit.git 远程库的名字叫gitee
+git remote -v
+# 如果要推送到GitHub使用命令
+git push github main
+# 如果要推送到Gitee
+git push gitee main
+
+#忽略特殊文件
+# .gitignore 在Git工作区的根目录下创建一个特殊的.gitignore
+# 在忽略的情况下添加文件
+
+#设置别名
+#告诉git设置命令别名
+git config --global alias.st status
+#还可以设置如：
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.br branch
+# 撤销修改 git reset HEAD file可以把暂存区的修改撤销，重新放回工作区
+git config --global alias.unstage 'reset HEAD'
+# 配置一个git last可以显示最后一次提交信息
+git config --global alias.last 'log -l'
+
+# 配置文件
+# 加上 --global 是针对当前用户，不加则针对当前的仓库
+# 配置文件的去处 .git/config
+cat .git/config
+# 当前用户的Git配置文件放在用户主目录下的一个隐藏文件 .gitconfig 中
+
+# 使用SourceTree
